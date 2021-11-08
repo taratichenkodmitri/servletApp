@@ -10,7 +10,7 @@
     <%
         List<user> users = (List<user>) request.getAttribute("users");
         for (user s : users) {
-        out.println("<li>" + s.getUsername() + "</li>");
+            out.println("<li>" + s.getUsername() + "</li>");
         }
     %>
 <br/>

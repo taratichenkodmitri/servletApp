@@ -35,10 +35,10 @@ public class signUpServlet extends HttpServlet {
         String name = req.getParameter("name");
         String password = req.getParameter("pass");
 
-        user user = new user(name,password);
+        user user = new user(0,name,password);
 
         try {
-            uD.registerUSer(user);
+            uD.createUSer(user);
         } catch (SQLException e) {
             e.printStackTrace();
         }

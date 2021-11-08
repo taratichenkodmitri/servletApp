@@ -3,16 +3,24 @@ package com.hornhub.hornsite.entities;
 import java.util.Objects;
 
 public class user {
+
+    private  int id;
     private String username;
     private String password;
 
     public user(){
 
     }
-    public user(String username, String password){
+
+    public user(int id, String username, String password){
+        this.id = id;
         this.username = username;
         this.password = password;
     }
+
+    public int getId() {return this.id;}
+
+    public void setId(int id) {this.id = id;}
 
     public void setUsername(String username) {
         this.username = username;

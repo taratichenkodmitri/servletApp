@@ -28,7 +28,7 @@ public class listUsersServlet extends HttpServlet {
         List<user> users = null;
 
         try {
-            users = uD.getUsers();
+            users = uD.getAllUsers();
         } catch (SQLException e) {
             e.printStackTrace();
         }
