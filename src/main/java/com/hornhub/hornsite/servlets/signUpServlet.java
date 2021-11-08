@@ -1,7 +1,7 @@
 package com.hornhub.hornsite.servlets;
 
 import com.hornhub.hornsite.entities.user;
-import com.hornhub.hornsite.model.dataController;
+import com.hornhub.hornsite.model.userDao;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,14 +10,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet(name = "signUpServlet",urlPatterns = "/sign-up")
 public class signUpServlet extends HttpServlet {
-    private String message;
+    private userDao uD;
 
     @Override
     public void init() {
-        message = "Hello World!";
+        this.uD = new userDao();
     }
 
     @Override
@@ -36,8 +37,11 @@ public class signUpServlet extends HttpServlet {
 
         user user = new user(name,password);
 
-        dataController dC = dataController.getInstance();
-        dC.addUser(user);
+        try {
+            uD.registerUSer(user);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         req.setAttribute("userName", name);
         doGet(req, resp);

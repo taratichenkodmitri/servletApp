@@ -1,5 +1,6 @@
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.hornhub.hornsite.entities.user" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -7,9 +8,9 @@
 </head>
 <body>
     <%
-        List<String> names = (List<String>) request.getAttribute("userNames");
-        for (String s : names) {
-        out.println("<li>" + s + "</li>");
+        List<user> users = (List<user>) request.getAttribute("users");
+        for (user s : users) {
+        out.println("<li>" + s.getUsername() + "</li>");
         }
     %>
 <br/>
