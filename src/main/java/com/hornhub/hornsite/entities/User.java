@@ -2,17 +2,22 @@ package com.hornhub.hornsite.entities;
 
 import java.util.Objects;
 
-public class user {
+public class User {
 
     private  int id;
     private String username;
     private String password;
 
-    public user(){
+    public User(){
 
     }
 
-    public user(int id, String username, String password){
+    public User(String username, String password){
+        this.username = username;
+        this.password = password;
+    }
+
+    public User(int id, String username, String password){
         this.id = id;
         this.username = username;
         this.password = password;
@@ -48,7 +53,7 @@ public class user {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
 
-        user user = (com.hornhub.hornsite.entities.user) obj;
+        User user = (User) obj;
 
         if (!Objects.equals(username, user.username)) return false;
         return Objects.equals(password, user.password);

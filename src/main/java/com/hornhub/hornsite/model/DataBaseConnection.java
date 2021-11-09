@@ -23,4 +23,8 @@ public class DataBaseConnection {
     {
         return con;
     }
+
+    public static void closeConnection() throws SQLException {
+        con.close();
+    }
 }

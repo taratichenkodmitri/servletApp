@@ -1,7 +1,7 @@
 package com.hornhub.hornsite.servlets;
 
-import com.hornhub.hornsite.entities.user;
-import com.hornhub.hornsite.model.userDao;
+import com.hornhub.hornsite.entities.User;
+import com.hornhub.hornsite.model.UserDao;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,28 +13,39 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet(name = "listUsersServlet",urlPatterns = "/list-users")
-public class listUsersServlet extends HttpServlet {
+@WebServlet(name = "ListUsersServlet",urlPatterns = "/list-users")
+public class ListUsersServlet extends HttpServlet {
 
-    private userDao uD;
+    private UserDao uD;
 
+    @Override
     public void init() {
-        this.uD = new userDao();
+        this.uD = new UserDao();
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        List<user> users = null;
+        List<User> Users = null;
 
         try {
-            users = uD.getAllUsers();
+            Users = uD.getAllUsers();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        req.setAttribute("users", users);
+        req.setAttribute("Users", Users);
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("pages/listUsers.jsp");
         requestDispatcher.forward(req, resp);
+    }
+
+    @Override
+    public void destroy() {
+        try {
+            uD.closeConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Servlet is being destroyed");
     }
 }

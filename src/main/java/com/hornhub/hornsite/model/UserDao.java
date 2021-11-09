@@ -1,16 +1,16 @@
 package com.hornhub.hornsite.model;
 
-import com.hornhub.hornsite.entities.user;
+import com.hornhub.hornsite.entities.User;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class userDao {
+public class UserDao {
 
     static Connection con = DataBaseConnection.getConnection();
 
-    public static int createUSer(user user) throws SQLException {
+    public int createUSer(User user) throws SQLException {
 
         String INSERT_USER_SQL = "INSERT INTO users" + "(name, password) VALUES " + "(?,?)";
         PreparedStatement ps = con.prepareStatement(INSERT_USER_SQL);
@@ -35,7 +35,7 @@ public class userDao {
         return status;
     }
 
-    public boolean updateUser(user user) throws SQLException {
+    public boolean updateUser(User user) throws SQLException {
         boolean status = false;
         String UPDATE_USERS_SQL = "update users set name = ?,password= ? where id = ?;";
 
@@ -48,9 +48,9 @@ public class userDao {
         return status;
     }
 
-    public user readUser(int id) throws SQLException {
+    public User readUser(int id) throws SQLException {
 
-        user user = null;
+        User user = null;
         String SELECT_USER_BY_ID = "select id,name,password from users where id =?";
 
         PreparedStatement ps = con.prepareStatement(SELECT_USER_BY_ID);
@@ -61,23 +61,23 @@ public class userDao {
             String name = rs.getString("name");
             String password = rs.getString("password");
 
-            user = new user(id, name, password);
+            user = new User(id, name, password);
         }
         return user;
     }
 
 
 
-    public List<user> getAllUsers() throws SQLException {
+    public List<User> getAllUsers() throws SQLException {
 
         String query = "select * from users";
         PreparedStatement ps = con.prepareStatement(query);
         ResultSet rs = ps.executeQuery();
-        List<user> users_list = new ArrayList();
+        List<User> users_list = new ArrayList();
 
         while (rs.next()) {
 
-            user u = new user();
+            User u = new User();
 
             u.setId(rs.getInt("id"));
             u.setUsername(rs.getString("name"));
@@ -89,4 +89,7 @@ public class userDao {
         return users_list;
     }
 
+    public void closeConnection() throws SQLException {
+        DataBaseConnection.closeConnection();
+    }
 }

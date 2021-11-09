@@ -1,7 +1,7 @@
 package com.hornhub.hornsite.servlets;
 
-import com.hornhub.hornsite.entities.user;
-import com.hornhub.hornsite.model.userDao;
+import com.hornhub.hornsite.entities.User;
+import com.hornhub.hornsite.model.UserDao;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,13 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet(name = "signUpServlet",urlPatterns = "/sign-up")
-public class signUpServlet extends HttpServlet {
-    private userDao uD;
+@WebServlet(name = "SignUpServlet",urlPatterns = "/sign-up")
+public class SignUpServlet extends HttpServlet {
+    private UserDao uD;
 
     @Override
     public void init() {
-        this.uD = new userDao();
+        this.uD = new UserDao();
     }
 
     @Override
@@ -35,7 +35,7 @@ public class signUpServlet extends HttpServlet {
         String name = req.getParameter("name");
         String password = req.getParameter("pass");
 
-        user user = new user(0,name,password);
+        User user = new User(name,password);
 
         try {
             uD.createUSer(user);
@@ -49,6 +49,11 @@ public class signUpServlet extends HttpServlet {
 
     @Override
     public void destroy() {
+        try {
+            uD.closeConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         System.out.println("Servlet is being destroyed");
     }
 }
