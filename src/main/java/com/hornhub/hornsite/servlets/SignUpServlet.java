@@ -23,17 +23,15 @@ public class SignUpServlet extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException,IOException {
-
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("pages/signUp.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("index.html");
         requestDispatcher.forward(req, resp);
 
     }
 
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        String name = req.getParameter("name");
-        String password = req.getParameter("pass");
+        String name = req.getParameter("username");
+        String password = req.getParameter("password");
 
         User user = new User(name,password);
 
@@ -43,7 +41,6 @@ public class SignUpServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        req.setAttribute("userName", name);
         doGet(req, resp);
     }
 

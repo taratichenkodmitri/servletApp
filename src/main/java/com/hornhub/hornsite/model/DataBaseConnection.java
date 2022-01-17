@@ -9,7 +9,7 @@ public class DataBaseConnection {
     static
     {
         String url = "jdbc:mysql://localhost:3306/my_db?useSSL=false";
-        String user = "ostechnix";
+        String user = "tort";
         String pass = "Password123#@!";
         try {
             Class.forName("com.mysql.jdbc.Driver");

@@ -1,0 +1,61 @@
+html {
+    font-family: sans-serif;
+    height: 100%;
+}
+
+body {
+    height: inherit;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    background-color: white;
+    color: black;
+    border: 2px solid BlueViolet;
+    border-radius: 8px;
+    padding: 16px 32px;
+    margin: 16px 16px 16px 16px;
+    font-size: 28px;
+    transition-duration: 0.4s;
+}
+
+button:hover {
+    background-color: BlueViolet;
+    color: white;
+}
+
+form {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    padding: 10px;
+    grid-gap: 10px;
+
+    border: 2px solid BlueViolet;
+    border-radius: 8px;
+}
+
+form label {
+    grid-column: auto / span 2;
+    text-align: right;
+}
+
+form input {
+    grid-column: auto / span 3;
+}
+
+form input[value='sign in'] {
+    grid-column: 2 / span 3;
+    background-color: white;
+    border-radius: 8px;
+}
+
+form input[value='sign in']:hover {
+    background-color: BlueViolet;
+    color: white;
+}
+table {
+    background-color: #ff33cc;
+}
